@@ -1,0 +1,96 @@
+package no.hiof.haakonka.obligOOP;
+
+import robocode.*;
+
+public class roBob extends Robot {
+
+    boolean turnRadarClockwise = true;
+    int turnRadarThisManyDegrees = 45;
+    double oldBearing;
+
+    //Når roboten vår treffer motstanderen kjører den x fremover
+    @Override
+    public void onBulletHit(BulletHitEvent event) {
+        ahead(Math.random()*10);
+    }
+
+    //Når roboten vår blir truffet av motstanderen rygger den og svinger
+    @Override
+    public void onHitByBullet(HitByBulletEvent event) {
+        ahead(-50);
+        turnRight(30);
+    }
+
+    //Når robotene krasjer kjører min fremover
+    @Override
+    public void onHitRobot(HitRobotEvent event) {
+        ahead(40);
+    }
+
+    //Når roboten vår treffer en kjører den vekk fra den igjen
+    @Override
+    public void onHitWall(HitWallEvent event) {
+        if(event.getBearing()<180){
+            ahead(-60);
+        }
+        else if(event.getBearing()>180){
+            ahead(60);
+        }
+    }
+
+    //Når roboten vår ser en annen robot skal kanonen rettes mot denne retningen og radaren prøver å låse seg på målet
+    @Override
+    public void onScannedRobot(ScannedRobotEvent event) {
+
+        //Kanonhåndtering. Kanonen roterer først, deretter kalibreres radaren. If-tester for å rotere kanonen den korteste veien
+        if(getRadarHeading()-getGunHeading() < 180) {
+            double recalibrateRadar = getRadarHeading() - getGunHeading();
+            turnGunRight(getRadarHeading() - getGunHeading());
+            turnRadarLeft(recalibrateRadar);
+            fire(1.5);
+        }
+        else if(getRadarHeading()-getGunHeading() >= 180){
+            double recalibrateRadar2 = 360 - getRadarHeading() + getGunHeading();
+            turnGunLeft(360 - getRadarHeading() + getGunHeading());
+            turnRadarRight(recalibrateRadar2);
+            fire(1.5);
+        }
+
+        //Radarhåndtering. If testene holder radaren foran kjøreretningen på motstanderen og roterer mot kjøreretningen.
+        if(getRadarHeading() < 180){
+            if(oldBearing > event.getBearing()){
+                turnRadarLeft(15);
+                turnRadarClockwise = true;
+            }
+            else if(oldBearing < event.getBearing()){
+                turnRadarRight(15);
+                turnRadarClockwise = false;
+            }
+        }
+        else if(getRadarHeading() > 180) {
+            if (oldBearing < event.getBearing()) {
+                turnRadarRight(15);
+                turnRadarClockwise = false;
+
+            } else if (oldBearing > event.getBearing()) {
+                turnRadarLeft(15);
+                turnRadarClockwise = true;
+            }
+        }
+        oldBearing = event.getBearing();
+        turnRadarThisManyDegrees = 10;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            //Radaren går enten med eller mot klokka avhenging av hva radaren plukker opp.
+            if(turnRadarClockwise){
+                turnRadarRight(turnRadarThisManyDegrees);
+            }
+            else if(!turnRadarClockwise){
+                turnRadarLeft(turnRadarThisManyDegrees);
+                }
+        }
+    }
+}
