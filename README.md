@@ -1,2 +1,2 @@
 # java-project
-An assignment I had
+Here are some of my Java projects
