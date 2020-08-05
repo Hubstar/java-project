@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="995.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.haakonka.obligOOP.controller.MovieOverviewController">
+   <children>
+      <Pane layoutX="556.0" layoutY="16.0" prefHeight="506.0" prefWidth="409.0">
+         <children>
+            <TextField fx:id="textFieldReleaseDate" editable="false" layoutX="33.0" layoutY="337.0" />
+            <TextField fx:id="textFieldPlaytime" editable="false" layoutX="33.0" layoutY="394.0" />
+            <Label layoutX="36.0" layoutY="74.0" prefHeight="17.0" prefWidth="71.0" text="Description" />
+            <Label layoutX="36.0" layoutY="377.0" text="Playtime" />
+            <Button fx:id="btnNewMovie" layoutX="31.0" layoutY="442.0" mnemonicParsing="false" onAction="#addNewMovie" text="New" />
+            <Button fx:id="btnEditMovie" layoutX="107.0" layoutY="442.0" mnemonicParsing="false" onAction="#redigerFilm" text="Edit" />
+            <Button fx:id="btnDeleteMovie" layoutX="179.0" layoutY="442.0" mnemonicParsing="false" onAction="#btnDeleteMovie" text="Delete" />
+            <Label layoutX="36.0" layoutY="320.0" prefHeight="17.0" prefWidth="71.0" text="Release date" />
+            <Label fx:id="labelMovieTitle" layoutX="31.0" layoutY="14.0" text="Title">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <ImageView fx:id="imageViewMoviePoster" fitHeight="200.0" fitWidth="139.0" layoutX="240.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+            <TextArea fx:id="textAreaDescription" editable="false" layoutX="31.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+         </children>
+      </Pane>
+      <ListView fx:id="filmliste" layoutX="14.0" layoutY="17.0" prefHeight="375.0" prefWidth="487.0" AnchorPane.leftAnchor="14.0" />
+      <Label layoutX="28.0" layoutY="420.0" text="Sort by:" />
+      <ChoiceBox fx:id="choiceBoxSortMovies" layoutX="28.0" layoutY="438.0" prefWidth="150.0" />
+      <Label layoutX="258.0" layoutY="420.0" text="Search" />
+      <TextField fx:id="textFieldSearch" layoutX="258.0" layoutY="438.0" />
+   </children>
+</AnchorPane>
