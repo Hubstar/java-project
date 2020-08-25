@@ -1,5 +1,5 @@
 # java-project
-Here are some of my Java projects
+Here are some of my Java projects that I did when studying.
 
 oblig6 was a project where I created an application for keeping track of movies and TV-series using JavaFX.
 
